@@ -8,7 +8,7 @@ export interface State {
   query: string;
 }
 
-const LocalStorageKey = 'lastSearch';
+export const LocalStorageKey = 'lastSearch';
 
 export default class Search extends Component<Props, State> {
   state: State = {
