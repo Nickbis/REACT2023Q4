@@ -6,6 +6,7 @@ export interface Props {
 
 export interface State {
   query: string;
+  rezults: [];
 }
 
 export const LocalStorageKey = 'lastSearch';
@@ -13,6 +14,7 @@ export const LocalStorageKey = 'lastSearch';
 export default class Search extends Component<Props, State> {
   state: State = {
     query: '',
+    rezults: [],
   };
 
   constructor(props: Props) {
@@ -27,12 +29,27 @@ export default class Search extends Component<Props, State> {
     });
   }
 
+  async getSearch(query?: string): Promise<void> {
+    const apiURL = 'https://rickandmortyapi.com/api/character';
+    const queryString = query ? `?name=${query}` : '';
+    let res = null;
+
+    const response = await fetch(`${apiURL}${queryString}`);
+    if (!response.ok) {
+      throw new Error('Error data from API');
+    }
+    res = await response.json();
+    return res;
+  }
+
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const { query } = this.state;
     if (query) {
-      // Вызываем функцию поиска по api из пропсов
-      //this.props.onSearchApi(query);
+
+      const rezults = this.getSearch(query);
+
+      console.log('rezult=',rezults);
       localStorage.setItem(LocalStorageKey, query);
     } else {
       localStorage.setItem(LocalStorageKey, '');
