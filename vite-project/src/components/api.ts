@@ -6,16 +6,20 @@ export class OnSearchApi {
     return this.instance;
   }
 
-  async getSearch(query?: string) {
-    const apiURL = 'https://rickandmortyapi.com/api/character';
-    const queryString = query ? `?name=${query}` : '';
-    let res = null;
+  public async getSearch(query?: string | null) {
+    let resSearh = [];
+    try {
+      const apiURL = 'https://rickandmortyapi.com/api/character';
+      const queryString = query ? `?name=${query}` : '';
 
-    const response = await fetch(`${apiURL}${queryString}`);
-    if (!response.ok) {
-      throw new Error('Error data from API');
+      const response = await fetch(`${apiURL}${queryString}`);
+      if (response.ok) {
+        resSearh = await response.json();
+      }
+    } catch (err) {
+      console.log(err);
     }
-    res = await response.json();
-    return res;
+
+    return resSearh.results;
   }
 }
