@@ -17,7 +17,6 @@ export default class Results extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.API = OnSearchApi.getInstance();
-    const { query } = this.props;
     this.API.getSearch = this.API.getSearch.bind(this);
   }
 
@@ -32,42 +31,38 @@ export default class Results extends Component<Props, State> {
       const { query } = this.props;
       const results: ApiSearchResult[] = await this.API.getSearch(query);
       this.setState({ results });
-
     }
   }
 
   render() {
     const { results } = this.state;
     if (results) {
-
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Image URL</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map((results) => (
-            <tr key={results.id}>
-              <td>{results.id}</td>
-              <td>{results.name}</td>
-              <td>{results.gender}</td>
-              <td>
-                <a href={results.image}>{results.image}</a>
-              </td>
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Image URL</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-          } else {
-            return (
-            <h3>Not found</h3>
-            )
-          }
+          </thead>
+          <tbody>
+            {results.map((results) => (
+              <tr key={results.id}>
+                <td>{results.id}</td>
+                <td>{results.name}</td>
+                <td>{results.gender}</td>
+                <td>
+                  <a href={results.image}>{results.image}</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    } else {
+      return <h3>Not found</h3>;
+    }
   }
 }
