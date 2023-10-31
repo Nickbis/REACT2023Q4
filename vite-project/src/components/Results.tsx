@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ApiSearchResult } from './types';
 import { OnSearchApi } from './api';
-import { LocalStorageKey } from './Search'
+import { LocalStorageKey } from './Search';
 
 interface Props {
   query: string;
@@ -18,35 +18,29 @@ export default class Results extends Component<Props, State> {
     super(props);
     this.API = OnSearchApi.getInstance();
     const { query } = this.props;
-    console.log('result query=', { query });
     this.API.getSearch = this.API.getSearch.bind(this);
   }
 
   async componentDidMount() {
     const lastSearch = localStorage.getItem(LocalStorageKey);
-    const results:ApiSearchResult[] = await this.API.getSearch(lastSearch);
-    console.log('ResultSearch=', lastSearch, 'Search=', results);
-    this.setState( {results} );
-    
+    const results: ApiSearchResult[] = await this.API.getSearch(lastSearch);
+    this.setState({ results });
   }
 
-  async componentDidUpdate(
-    prevProps: Readonly<Props>,
-    //prevState: Readonly<State>
-  ) {
+  async componentDidUpdate(prevProps: Readonly<Props>) {
     if (prevProps.query !== this.props.query) {
       const { query } = this.props;
-      const results:ApiSearchResult[] = await this.API.getSearch(query);
-      console.log(results);
-      this.setState( {results} );
+      const results: ApiSearchResult[] = await this.API.getSearch(query);
+      this.setState({ results });
+
     }
   }
 
   render() {
     const { results } = this.state;
+    if (results) {
 
     return (
-
       <table>
         <thead>
           <tr>
@@ -57,18 +51,23 @@ export default class Results extends Component<Props, State> {
           </tr>
         </thead>
         <tbody>
-{/* Используем метод map для перебора массива результатов и создания элементов строки таблицы для каждого результата */}
-{results.map(results => (
-<tr key={results.id}>
-<td>{results.id}</td>
-<td>{results.name}</td>
-<td>{results.gender}</td>
-{/* Используем атрибут href для создания гиперссылки на url результата */}
-<td><a href={results.image}>{results.image}</a></td>
-</tr>
-))}
-</tbody>
+          {results.map((results) => (
+            <tr key={results.id}>
+              <td>{results.id}</td>
+              <td>{results.name}</td>
+              <td>{results.gender}</td>
+              <td>
+                <a href={results.image}>{results.image}</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     );
+          } else {
+            return (
+            <h3>Not found</h3>
+            )
+          }
   }
 }
