@@ -32,7 +32,6 @@ export default class Results extends Component<Props, State> {
       this.setState( {results} );
     }
   }
-const husky1 = Tst(all)
 
   render() {
 
