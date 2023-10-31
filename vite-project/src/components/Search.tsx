@@ -44,7 +44,11 @@ export default class Search extends Component<Props, State> {
       //console.log('resSearch=', resSearch); // Delete!!
       localStorage.setItem(LocalStorageKey, query);
     } else {
-      localStorage.setItem(LocalStorageKey, '');
+      this.props.onQuery(query);
+      localStorage.setItem(LocalStorageKey, '')
+      this.setState({
+        query: '',
+      });
     }
   }
 

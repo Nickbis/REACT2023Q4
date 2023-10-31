@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ApiSearchResult } from './types';
 import { OnSearchApi } from './api';
+import { LocalStorageKey } from './Search'
 
 interface Props {
   query: string;
@@ -21,13 +22,21 @@ export default class Results extends Component<Props, State> {
     this.API.getSearch = this.API.getSearch.bind(this);
   }
 
+  async componentDidMount() {
+    const lastSearch = localStorage.getItem(LocalStorageKey);
+    const results:ApiSearchResult[] = await this.API.getSearch(lastSearch);
+    console.log('ResultSearch=', lastSearch, 'Search=', results);
+    this.setState( {results} );
+    
+  }
+
   async componentDidUpdate(
     prevProps: Readonly<Props>,
     //prevState: Readonly<State>
   ) {
     if (prevProps.query !== this.props.query) {
       const { query } = this.props;
-      const results = await this.API.getSearch(query);
+      const results:ApiSearchResult[] = await this.API.getSearch(query);
       console.log(results);
       this.setState( {results} );
     }
