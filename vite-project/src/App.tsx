@@ -17,7 +17,7 @@ export default class App extends Component {
       <>
         <div className="App">
           <Search onQuery={this.handleQuery} />
-          <h3>React Components</h3>
+          <h3>The Rick and Morty</h3>
           <Results query={this.state.query} />
         </div>
       </>
