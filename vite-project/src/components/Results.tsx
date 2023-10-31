@@ -17,17 +17,26 @@ export default class Results extends Component<Props, State> {
     super(props);
     this.API = OnSearchApi.getInstance();
     const { query } = this.props;
-    console.log('result query=', {query});
-     this.API.getSearch = this.API.getSearch.bind(this);
+    console.log('result query=', { query });
+    this.API.getSearch = this.API.getSearch.bind(this);
   }
 
-  //  const { query } = this.props;
+  async componentDidUpdate(
+    prevProps: Readonly<Props>,
+    //prevState: Readonly<State>
+  ) {
+    if (prevProps.query !== this.props.query) {
+      const { query } = this.props;
+      const results = await this.API.getSearch(query);
+      console.log(results);
+      this.setState( {results} );
+    }
+  }
 
   render() {
-    // Получаем массив результатов из пропсов
-    //const { results } = this.props;
+
     return (
-      // Рендерим элемент таблицы с заголовками столбцов
+
       <table>
         <thead>
           <tr>

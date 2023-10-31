@@ -17,7 +17,7 @@ export default class Search extends Component<Props, State> {
   //API: OnSearchApi;
   state: State = {
     query: '',
-   // resSearch: null,
+    // resSearch: null,
   };
 
   constructor(props: Props) {
@@ -33,7 +33,7 @@ export default class Search extends Component<Props, State> {
     });
   }
 
-   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const { query } = this.state;
     if (query) {
@@ -48,8 +48,8 @@ export default class Search extends Component<Props, State> {
     }
   }
 
-   componentDidMount() {
-   const lastSearch = localStorage.getItem(LocalStorageKey);
+  componentDidMount() {
+    const lastSearch = localStorage.getItem(LocalStorageKey);
     //const Search = await this.API.getSearch(lastSearch);
     //console.log('LastSearch=', lastSearch, 'Search=', Search);
     if (lastSearch) {
@@ -60,14 +60,14 @@ export default class Search extends Component<Props, State> {
     }
   }
 
-   async componentDidUpdate(
-     prevProps: Readonly<Props>,
-     prevState: Readonly<State>
-   ) {
+  async componentDidUpdate(
+    prevProps: Readonly<Props>,
+    prevState: Readonly<State>
+  ) {
     if (prevState.query !== this.state.query) {
       //const { query } = this.state;
-  //const resSearch = await this.API.getSearch(query);
-  // this.setState({ resSearch });
+      //const resSearch = await this.API.getSearch(query);
+      // this.setState({ resSearch });
     }
   }
 
