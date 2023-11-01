@@ -3,7 +3,7 @@
 
 1. Clone the repository with the command
 
-   `git clone `
+   `git clone https://github.com/Nickbis/REACT2023Q4.git`
 
 2. Change branch to react-components
 
