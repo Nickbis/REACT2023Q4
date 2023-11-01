@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Search from './components/Search';
 import Results from './components/Results';
 import { ErrorBoundary } from './components/errorBoundary';
 import { ErrorButton } from './components/errorButton';
 import './App.css';
 
-export default class App extends Component {
+export default class App extends React.Component {
   state = {
     query: '',
   };

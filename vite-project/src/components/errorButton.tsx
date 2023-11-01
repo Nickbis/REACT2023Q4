@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 interface State {
   hasError: boolean;
 }
+interface Props {}
 
-export class ErrorButton extends Component<State> {
+export class ErrorButton extends React.Component<Props, State> {
   state: State = { hasError: false };
 
   render() {

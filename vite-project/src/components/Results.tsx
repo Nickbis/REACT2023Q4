@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ApiSearchResult } from './types';
 import { OnSearchApi } from './api';
 import { LocalStorageKey } from './Search';
@@ -9,7 +9,7 @@ interface Props {
 interface State {
   results: ApiSearchResult[];
 }
-export default class Results extends Component<Props, State> {
+export default class Results extends React.Component<Props, State> {
   state: State = {
     results: [],
   };
