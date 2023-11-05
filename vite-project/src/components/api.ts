@@ -11,6 +11,9 @@ export async function getSearch(query?: null | string) {
   } catch (err) {
     console.log(err);
   }
-  console.log(resSearch);
-  return resSearch.results;
+
+  const info = resSearch.info;
+  const data = resSearch.results;
+  console.log('info=', info, 'data=', data);
+  return data;
 }
