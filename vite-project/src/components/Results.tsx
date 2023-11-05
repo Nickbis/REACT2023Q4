@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ApiSearchResult } from './types';
-import { OnSearchApi } from './api';
+import { getSearch } from './api';
 import { LocalStorageKey } from './Search';
 
 interface Props {
@@ -10,21 +10,20 @@ interface Props {
 export default function Results(props: Props) {
   const [results, setResults] = useState<ApiSearchResult[]>([]);
 
-  const API = OnSearchApi.getInstance();
-
   useEffect(() => {
     const fetchResults = async () => {
       const lastSearch = localStorage.getItem(LocalStorageKey);
-      const results: ApiSearchResult[] = await API.getSearch(lastSearch);
+      const results: ApiSearchResult[] = await getSearch(lastSearch);
+      console.log('ls=', lastSearch, 'use1=', results);
       setResults(results);
     };
     fetchResults();
-  }, []); // eslint-disable-line
+  }, []);
 
   useEffect(() => {
     const fetchResults = async () => {
       const { query } = props;
-      const results: ApiSearchResult[] = await API.getSearch(query);
+      const results: ApiSearchResult[] = await getSearch(query);
       setResults(results);
     };
     fetchResults();

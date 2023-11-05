@@ -1,25 +1,16 @@
-export class OnSearchApi {
-  private static instance: OnSearchApi;
+export async function getSearch(query?: null | string) {
+  let resSearch = [];
+  try {
+    const apiURL = 'https://rickandmortyapi.com/api/character';
+    const queryString = query ? `?name=${query}` : '';
 
-  public static getInstance() {
-    if (!this.instance) this.instance = new OnSearchApi();
-    return this.instance;
-  }
-
-  public async getSearch(query?: string | null) {
-    let resSearh = [];
-    try {
-      const apiURL = 'https://rickandmortyapi.com/api/character';
-      const queryString = query ? `?name=${query}` : '';
-
-      const response = await fetch(`${apiURL}${queryString}`);
-      if (response.ok) {
-        resSearh = await response.json();
-      }
-    } catch (err) {
-      console.log(err);
+    const response = await fetch(`${apiURL}${queryString}`);
+    if (response.ok) {
+      resSearch = await response.json();
     }
-
-    return resSearh.results;
+  } catch (err) {
+    console.log(err);
   }
+  console.log(resSearch);
+  return resSearch.results;
 }
