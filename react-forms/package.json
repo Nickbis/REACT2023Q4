@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format:fix": "prettier --write src/",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "cd .. && husky install react-forms/.husky"
   },
   "dependencies": {
     "prettier": "^3.1.0",
@@ -29,9 +30,21 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
+  },
+  "husky": {
+    "hook": {
+      "pre-comit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx}": [
+      "npm run lint",
+      "prettier --write --ignore-unknown"
+    ]
   }
 }
