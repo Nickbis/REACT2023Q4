@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Cards from '../../shared/cards';
 
 const Main = () => {
   return (
@@ -11,7 +12,7 @@ const Main = () => {
           <button>Form2</button>
         </Link>
       </div>
-      {/* // To Do Cards */}
+      <Cards />
     </div>
   );
 };
