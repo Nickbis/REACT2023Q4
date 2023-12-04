@@ -10,7 +10,7 @@
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format:fix": "prettier --write src/",
     "preview": "vite preview",
-    "prepare": "cd .. && husky install react-forms/.husky"
+    "prepare": "cd .. && husky install .husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
