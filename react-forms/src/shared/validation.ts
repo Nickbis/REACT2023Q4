@@ -2,7 +2,6 @@ import * as yup from 'yup';
 
 export interface TypesForm extends yup.InferType<typeof schemaValidate> {}
 export const schemaValidate = yup.object().shape({
-
   name: yup
     .string()
     .required('Enter your name')

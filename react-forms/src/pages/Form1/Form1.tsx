@@ -35,7 +35,7 @@ const Form1 = () => {
         className="border-4 rounded-xl p-3 "
         onSubmit={handleSubmit(onSubmit)}
       >
-        <p className="font-bold">Form 1:</p>
+        <p className="font-bold">Form 1 Controlled:</p>
 
         <div className="relative">
           <label htmlFor="name" className=" block font-medium mb-1">
@@ -180,7 +180,7 @@ const Form1 = () => {
               type="checkbox"
             />
             <label htmlFor="forms-checkbox" className="cursor-pointer px-2 ">
-              Accept T&C?
+              Accept T&C
             </label>
           </div>
         </div>
